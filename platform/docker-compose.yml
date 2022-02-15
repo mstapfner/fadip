@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=flexadf
+      - POSTGRES_USER=flexadf
+      - POSTGRES_PASSWORD=ASDVIfsaHU23HfFAS8dpl
+    ports:
+      - "5432:5432"
+  flex-adf:
+    image: flex-adf:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - db

@@ -1,0 +1,52 @@
+# FADIP Configuration files
+
+fadip:
+  version: 0.1
+  inital_setup: True
+  working_mode: "normal"
+  datasources:
+    - type: "prometheus"
+      id: "prom1" # Unique, To support multiple datasources
+      url: "http://localhost:9090"
+      username: "" # Optional
+      password: "" # Optional
+      disable_ssl: True | False # Optional
+    - type: "open-data"
+      id: "opendata1" # Unique, to support multiple datasources
+      location: "<filepath>" # Dataset location Filepath
+      format: "" # Dataset format
+      name: "" # Dataset n
+  management_database: # needs to be a postgres database
+    host: "localhost"
+    port: "5432"
+    username: "flexadf"
+    password: "ASDVIfsaHU23HfFAS8dpl"
+    db_name: "flexadf"
+  alerting:
+    slack:
+      # TBD
+      url: "" # Url of the slack instance
+      webhook_token: "" # Token of the slack instance
+    teams:
+      # TBD
+      url: "" # Url of the teams instance
+      webhook_token: "" #Token of the teams instance
+  timeseries:
+    - name: "process_cpu_seconds_total" # PromQL query for inclusion in anomaly detection
+      chunk_size: "5m" # Timeseries chunk size
+      datasource_id: "prometheus"
+    - name: "container_fs_inodes_free" # PromQL query for inclusion in anomaly detection
+      chunk_size: "5m" # Timeseries chunk size
+  algorithms:
+    - id: "iforest" # identifier for the algorithms
+      built_in: true # or false, whether the algorithm is implemented in the flex-adf_old adapater
+      secret: "" # secret for secure communicaton with the flex-adf_old compatible adapter
+      url: ""
+  mapping: # Mapping of datasources and timeseries
+    - datasource_id: "" # Id of the datasources from above
+      timeseries:
+        - id: "process_cpu_seconds" # identifier for timeseries
+          query: "process_cpu_seconds_total" # PromQL query for inclusion in anomaly detection
+          chunk_size: "5m" # Timeseries chunk size
+          algorithms: ["id_1", "id_2"] # ids of the algorithms
+          alerting: true # | false

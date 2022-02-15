@@ -1,0 +1,395 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Welcome8",
+    "definitions": {
+        "Welcome8": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "fadip": {
+                    "$ref": "#/definitions/Fadip"
+                }
+            },
+            "required": [
+                "fadip"
+            ],
+            "title": "Welcome8"
+        },
+        "Fadip": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "number"
+                },
+                "inital_setup": {
+                    "type": "boolean"
+                },
+                "working_mode": {
+                    "type": "string"
+                },
+                "datasources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Datasource"
+                    }
+                },
+                "management_database": {
+                    "$ref": "#/definitions/ManagementDatabase"
+                },
+                "model_storage": {
+                    "$ref": "#/definitions/ModelStorage"
+                },
+                "alerting": {
+                    "$ref": "#/definitions/Alerting"
+                },
+                "algorithms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FadipAlgorithm"
+                    }
+                },
+                "mapping": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mapping"
+                    }
+                },
+                "evaluation": {
+                    "$ref": "#/definitions/Evaluation"
+                }
+            },
+            "required": [
+                "alerting",
+                "algorithms",
+                "datasources",
+                "evaluation",
+                "inital_setup",
+                "management_database",
+                "mapping",
+                "model_storage",
+                "version",
+                "working_mode"
+            ],
+            "title": "Fadip"
+        },
+        "Alerting": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "slack": {
+                    "$ref": "#/definitions/Slack"
+                },
+                "teams": {
+                    "$ref": "#/definitions/Teams"
+                }
+            },
+            "required": [
+                "slack",
+                "teams"
+            ],
+            "title": "Alerting"
+        },
+        "Slack": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "oauth_token": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "oauth_token"
+            ],
+            "title": "Slack"
+        },
+        "Teams": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "webhook_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ]
+                }
+            },
+            "required": [
+                "webhook_url"
+            ],
+            "title": "Teams"
+        },
+        "FadipAlgorithm": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "built_in": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "built_in",
+                "id"
+            ],
+            "title": "FadipAlgorithm"
+        },
+        "Datasource": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "disable_ssl": {
+                    "$ref": "#/definitions/DisableSSL"
+                }
+            },
+            "required": [
+                "disable_ssl",
+                "id",
+                "password",
+                "type",
+                "url",
+                "username"
+            ],
+            "title": "Datasource"
+        },
+        "Evaluation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "graph_output_dir": {
+                    "type": "string"
+                },
+                "df_output_dir": {
+                    "type": "string"
+                },
+                "datasets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Dataset"
+                    }
+                }
+            },
+            "required": [
+                "datasets",
+                "df_output_dir",
+                "graph_output_dir"
+            ],
+            "title": "Evaluation"
+        },
+        "Dataset": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "local_path": {
+                    "type": "string"
+                },
+                "ts_type": {
+                    "type": "string"
+                },
+                "labeled": {
+                    "type": "boolean"
+                },
+                "unsupervised": {
+                    "type": "boolean"
+                },
+                "algorithms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DatasetAlgorithm"
+                    }
+                }
+            },
+            "required": [
+                "algorithms",
+                "id",
+                "labeled",
+                "local_path",
+                "ts_type",
+                "unsupervised"
+            ],
+            "title": "Dataset"
+        },
+        "DatasetAlgorithm": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "train_percentage": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "id",
+                "train_percentage"
+            ],
+            "title": "DatasetAlgorithm"
+        },
+        "ManagementDatabase": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "host": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "db_name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "db_name",
+                "host",
+                "password",
+                "port",
+                "username"
+            ],
+            "title": "ManagementDatabase"
+        },
+        "Mapping": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "datasource_id": {
+                    "type": "string"
+                },
+                "timeseries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Timesery"
+                    }
+                }
+            },
+            "required": [
+                "datasource_id",
+                "timeseries"
+            ],
+            "title": "Mapping"
+        },
+        "Timesery": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "query": {
+                    "type": "string"
+                },
+                "chunk_size": {
+                    "type": "string"
+                },
+                "algorithms": {
+                    "type": "string"
+                },
+                "alerting": {
+                    "type": "boolean"
+                },
+                "training_starttime": {
+                    "type": "integer"
+                },
+                "training_endtime": {
+                    "type": "integer"
+                },
+                "ts_type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "alerting",
+                "algorithms",
+                "chunk_size",
+                "id",
+                "query",
+                "training_endtime",
+                "training_starttime",
+                "ts_type"
+            ],
+            "title": "Timesery"
+        },
+        "ModelStorage": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "s3": {
+                    "$ref": "#/definitions/S3"
+                }
+            },
+            "required": [
+                "s3"
+            ],
+            "title": "ModelStorage"
+        },
+        "S3": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "aws_access_key_id": {
+                    "type": "string"
+                },
+                "aws_secret_access_key": {
+                    "type": "string"
+                },
+                "bucket_name": {
+                    "type": "string"
+                },
+                "activated": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "activated",
+                "aws_access_key_id",
+                "aws_secret_access_key",
+                "bucket_name"
+            ],
+            "title": "S3"
+        },
+        "DisableSSL": {
+            "anyOf": [
+                {
+                    "type": "boolean"
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "title": "DisableSSL"
+        }
+    }
+}

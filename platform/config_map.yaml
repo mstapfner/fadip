@@ -1,0 +1,100 @@
+# FADIP Configuration files
+
+fadip:
+  version: 0.1
+  inital_setup: True
+  working_mode: "normal"
+  datasources:
+    - type: prometheus
+      id: "prom1" # Unique, To support multiple datasources
+      url: "http://0.0.0.0:9090"
+      username: "" # Optional
+      password: "" # Optional
+      disable_ssl: True | False # Optional
+    - type: prometheus
+      id: "prom2" # Unique, To support multiple datasources
+      url: "http://0.0.0.0:9090"
+      username: ""
+      password: ""
+      disable_ssl: True
+  management_database:
+    host: "localhost"
+    port: "5432"
+    username: "flexadf"
+    password: "ASDVIfsaHU23HfFAS8dpl"
+    db_name: "flexadf"
+  model_storage:
+    s3:
+      aws_access_key_id: "X"
+      aws_secret_access_key: "X"
+      bucket_name: "X"
+      activated: False
+  alerting:
+    slack:
+      oauth_token: "X" # Oauth token of the slack instance
+    teams:
+      webhook_url: "X" # Token of the teams instance
+  mapping: # Mapping of datasources and timeseries
+    - datasource_id: "prom2"
+      timeseries:
+        - id: "prom2_p_c_s"
+          query: "rate(process_cpu_seconds_total[5m])"
+          chunk_size: "5m"
+          algorithms:
+            - id: "copod"
+              contamination_train: 0.01
+            - id: "iforest"
+              contamination_train: 0.02
+            - id: "hbos"
+              contamination_train: 0.01
+            - id: "knn"
+              contamination_train: 0.02
+            - id: "cblof"
+              contamination_train: 0.01
+          alerting: false
+          training_starttime: 1643625063
+          training_endtime: 1643650959
+          ts_type: "multivariate"
+        - id: "prom2_localhost_p_c_s"
+          query: "rate(process_cpu_seconds_total{instance='localhost:9090'}[5m])"
+          chunk_size: "5m"
+          algorithms:
+            - id: "copod"
+              contamination_train: 0.01
+            - id: "iforest"
+              contamination_train: 0.02
+            - id: "hbos"
+              contamination_train: 0.01
+            - id: "knn"
+              contamination_train: 0.02
+            - id: "cblof"
+              contamination_train: 0.01
+          alerting: false
+          training_starttime: 1643625063
+          training_endtime: 1643650959
+          ts_type: "univariate"
+  evaluation:
+    graph_output_dir: "../evaluations/graphs/"
+    df_output_dir: "../evaluations/raw_data/"
+    datasets:
+      - id: "reg2-app17.csv"
+        local_path: "../datasets/CommercialDatasets/preprocessed/reg2-app17.csv"
+        ts_type: "univariate"
+        labeled: false
+        unsupervised: true
+        algorithms:
+        - id: "copod"
+          train_percentage: 0.98
+          contamination_train: 0.001
+        - id: "iforest"
+          contamination_train: 0.001
+          train_percentage: 0.98
+        - id: "hbos"
+          train_percentage: 0.98
+          contamination_train: 0.001
+        - id: "knn"
+          train_percentage: 0.98
+          contamination_train: 0.001
+        - id: "cblof"
+          train_percentage: 0.98
+          contamination_train: 0.001

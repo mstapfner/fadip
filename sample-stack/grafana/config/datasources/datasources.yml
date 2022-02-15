@@ -1,0 +1,13 @@
+# config file version
+apiVersion: 1
+
+# list of datasources to insert/update
+datasources:
+  - name: MonitoringPrometheus
+    type: prometheus
+    orgId: 1
+    isDefault: true
+    uid: monitoring_prometheus
+    url: http://prometheus:9090
+    version: 1
+    editable: false
