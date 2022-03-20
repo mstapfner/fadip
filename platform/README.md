@@ -17,7 +17,7 @@ Start the script via: `python app/main.py`
 
 # Prod setup 
 
-Build flex-adf service: `docker buildx build --output type=docker --platform linux/amd64 -t flex-adf:latest .`
+Build flex-adf service: `docker buildx build --output type=docker --platform linux/amd64 -t fadip:latest .`
 
 Start the environment `docker-compose up`
 

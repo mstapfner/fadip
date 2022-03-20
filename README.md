@@ -1,5 +1,8 @@
 # FADIP - FlexibleAnomalyDetectionIntegrationPlatform
 
+This platform allows to use and evaluate different anomaly detection algorithms with timeseries from csv files or from 
+Prometheus instances.
+
 ## Sample Stack for Testing the framework 
 
 Can be found under /sample-stack. Provides a basic setup with Prometheus, Grafana, Node-Exporter, CADVisor. 

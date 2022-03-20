@@ -11,8 +11,9 @@ services:
       - POSTGRES_PASSWORD=ASDVIfsaHU23HfFAS8dpl
     ports:
       - "5432:5432"
-  flex-adf:
-    image: flex-adf:latest
+  fadip:
+    image: fadip:latest
+    build: .
     ports:
       - "80:80"
     depends_on:

@@ -1,7 +1,7 @@
 FROM continuumio/miniconda3 AS build
 
-COPY new_env.yml .
-RUN conda env create -f new_env.yml
+COPY environment.yml .
+RUN conda env create -f environment.yml
 
 RUN conda install -c conda-forge conda-pack
 
