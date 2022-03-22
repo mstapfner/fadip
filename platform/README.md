@@ -1,4 +1,4 @@
-# Dev setup using Conda
+ # Dev setup using Conda
 
 Create new conda environment: `conda env create -f environment.yml --name platform`
 

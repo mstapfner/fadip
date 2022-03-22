@@ -1,0 +1,14 @@
+pyod==0.9.7
+dask
+torch
+torchvision
+psycopg2==2.8.6
+prometheus-api-client==0.4.2
+prometheus-client==0.12.0
+prometheus-pandas==0.3.0
+jsonschema==4.3.3
+boto3==1.20.28
+prophet==1.0.1
+SQLAlchemy==1.4.29
+slack-sdk==3.13.0
+pymsteams==0.1.16
