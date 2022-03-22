@@ -2,11 +2,11 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
 
 WORKDIR /app/app
 
-COPY ./app /app/app
+COPY ./platform/app /app/app
 
-COPY config_map.yaml /app/config_map.yaml
+COPY ./platform/config_map.yaml /app/config_map.yaml
 
-COPY requirements.txt /app/requirements.txt
+COPY ./platform/requirements.txt /app/requirements.txt
 
 RUN pip install -r /app/requirements.txt
 
